@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Load user info
     try {
-        const response = await fetch(`/api/session?session=${sessionId}`);
+        const response = await fetch(`${config.API_URL}/api/session?session=${sessionId}`);
         const data = await response.json();
         
         if (data.user) {
@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         
         try {
             // Save portfolio data
-            await fetch(`/api/save-portfolio?session=${sessionId}`, {
+            await fetch(`${config.API_URL}/api/save-portfolio?session=${sessionId}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

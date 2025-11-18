@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Load portfolio data
     try {
-        const response = await fetch(`/api/get-portfolio?session=${sessionId}`);
+        const response = await fetch(`${config.API_URL}/api/get-portfolio?session=${sessionId}`);
         const result = await response.json();
         
         if (result.data) {

@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loginBtn.addEventListener('click', async () => {
         try {
             // Get Google OAuth URL from server
-            const response = await fetch('/auth/google/url');
+            const response = await fetch(`${config.API_URL}/auth/google/url`);
             const data = await response.json();
             
             if (data.url) {

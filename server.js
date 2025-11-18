@@ -5,8 +5,25 @@ const url = require('url');
 const querystring = require('querystring');
 const { OAuth2Client } = require('google-auth-library');
 
-// Load configuration
-const config = JSON.parse(fs.readFileSync('./config.json', 'utf8'));
+// Load configuration from environment variables or config file
+let config;
+if (process.env.GOOGLE_CLIENT_ID) {
+    // Production environment (Render)
+    config = {
+        google: {
+            clientId: process.env.GOOGLE_CLIENT_ID,
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+            redirectUri: process.env.REDIRECT_URI || `${process.env.BACKEND_URL}/auth/google/callback`
+        },
+        port: process.env.PORT || 3000,
+        frontendUrl: process.env.FRONTEND_URL || 'http://localhost:3000'
+    };
+} else {
+    // Development environment
+    config = JSON.parse(fs.readFileSync('./config.json', 'utf8'));
+    config.frontendUrl = config.frontendUrl || 'http://localhost:3000';
+}
+
 const client = new OAuth2Client(
   config.google.clientId,
   config.google.clientSecret,
@@ -53,10 +70,21 @@ const server = http.createServer(async (req, res) => {
   const parsedUrl = url.parse(req.url, true);
   const pathname = parsedUrl.pathname;
 
-  // Enable CORS for development
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  // Enable CORS for production (allow requests from Vercel frontend)
+  const origin = req.headers.origin;
+  const allowedOrigins = [
+    config.frontendUrl,
+    'http://localhost:3000',
+    'http://127.0.0.1:3000'
+  ];
+  
+  if (allowedOrigins.includes(origin) || origin?.includes('vercel.app')) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+  }
+  
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Cookie');
 
   if (req.method === 'OPTIONS') {
     res.writeHead(200);
@@ -66,7 +94,18 @@ const server = http.createServer(async (req, res) => {
 
   // Route: Home page
   if (pathname === '/' || pathname === '/index.html') {
-    serveStaticFile('./index.html', res);
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ 
+      message: 'Portfolio Generator API',
+      status: 'running',
+      endpoints: {
+        'GET /auth/google/url': 'Get Google OAuth URL',
+        'GET /auth/google/callback': 'OAuth callback',
+        'GET /api/session': 'Get user session',
+        'POST /api/save-portfolio': 'Save portfolio data',
+        'GET /api/get-portfolio': 'Get portfolio data'
+      }
+    }));
   }
   
   // Route: Get Google OAuth URL
@@ -112,10 +151,11 @@ const server = http.createServer(async (req, res) => {
         }
       });
 
-      // Redirect to form page with session
+      // Redirect to form page with session (redirect to Vercel frontend in production)
+      const redirectUrl = `${config.frontendUrl}/form.html?session=${sessionId}`;
       res.writeHead(302, {
-        'Location': `/form.html?session=${sessionId}`,
-        'Set-Cookie': `sessionId=${sessionId}; Path=/; HttpOnly`
+        'Location': redirectUrl,
+        'Set-Cookie': `sessionId=${sessionId}; Path=/; HttpOnly; SameSite=None; Secure`
       });
       res.end();
     } catch (error) {
@@ -183,17 +223,20 @@ const server = http.createServer(async (req, res) => {
   
   // Route: Static files
   else if (pathname.startsWith('/public/')) {
-    serveStaticFile(`.${pathname}`, res);
+    res.writeHead(404, { 'Content-Type': 'text/plain' });
+    res.end('Static files served from frontend');
   }
   
   // Route: Form page
   else if (pathname === '/form.html') {
-    serveStaticFile('./form.html', res);
+    res.writeHead(404, { 'Content-Type': 'text/plain' });
+    res.end('Frontend pages served from Vercel');
   }
   
   // Route: CV template page
   else if (pathname === '/cv-template.html') {
-    serveStaticFile('./cv-template.html', res);
+    res.writeHead(404, { 'Content-Type': 'text/plain' });
+    res.end('Frontend pages served from Vercel');
   }
   
   // 404 Not Found
