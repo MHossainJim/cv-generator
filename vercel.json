@@ -1,7 +1,10 @@
 {
-  "buildCommand": null,
+  "buildCommand": "node inject-env.js",
   "devCommand": null,
   "installCommand": null,
   "framework": null,
-  "outputDirectory": "."
+  "outputDirectory": ".",
+  "env": {
+    "VITE_API_URL": "@vite_api_url"
+  }
 }

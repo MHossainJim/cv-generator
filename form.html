@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio Form</title>
     <link rel="stylesheet" href="/public/css/style.css">
+    <script>
+        // Inject environment variables from Vercel at runtime
+        window.ENV_API_URL = '%%VITE_API_URL%%';
+        // Fallback for local development
+        if (window.ENV_API_URL === '%%VITE_API_URL%%') {
+            window.ENV_API_URL = 'http://localhost:3000';
+        }
+    </script>
 </head>
 <body>
     <div class="form-container">
@@ -186,7 +194,6 @@
         </form>
     </div>
 
-    <script src="/public/js/env.js"></script>
     <script src="/public/js/config.js"></script>
     <script src="/public/js/form.js"></script>
 </body>

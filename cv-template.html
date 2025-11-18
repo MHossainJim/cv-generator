@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CV Template</title>
     <link rel="stylesheet" href="/public/css/style.css">
+    <script>
+        // Inject environment variables from Vercel at runtime
+        window.ENV_API_URL = '%%VITE_API_URL%%';
+        // Fallback for local development
+        if (window.ENV_API_URL === '%%VITE_API_URL%%') {
+            window.ENV_API_URL = 'http://localhost:3000';
+        }
+    </script>
 </head>
 <body class="cv-body">
     <div class="cv-container" id="cv-content">
@@ -65,7 +73,6 @@
         <button id="back-btn" class="back-btn">Back to Edit</button>
     </div>
 
-    <script src="/public/js/env.js"></script>
     <script src="/public/js/config.js"></script>
     <script src="/public/js/cv.js"></script>
 </body>
