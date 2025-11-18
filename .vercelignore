@@ -1,0 +1,7 @@
+# Vercel should ignore package.json for frontend deployment
+package.json
+server.js
+config.json
+.env
+.env.example
+node_modules
