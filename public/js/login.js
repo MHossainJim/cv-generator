@@ -3,7 +3,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Get all login buttons
     const navLoginBtn = document.getElementById('nav-login-btn');
     const heroCtaBtn = document.getElementById('hero-cta-btn');
-    const footerCtaBtn = document.getElementById('footer-cta-btn');
     const errorMessage = document.getElementById('error-message');
 
     // Handle login for all buttons

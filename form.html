@@ -73,7 +73,8 @@
             <section class="form-section">
                 <h2>Education</h2>
                 <div id="education-container">
-                    <div class="education-entry">
+                    <div class="education-entry" data-index="0">
+                        <button type="button" class="remove-btn" onclick="removeEntry(this)" style="display: none;">✕ Remove</button>
                         <div class="form-group">
                             <label>Degree *</label>
                             <input type="text" name="education[0][degree]" required>
@@ -105,7 +106,8 @@
             <section class="form-section">
                 <h2>Work Experience</h2>
                 <div id="experience-container">
-                    <div class="experience-entry">
+                    <div class="experience-entry" data-index="0">
+                        <button type="button" class="remove-btn" onclick="removeEntry(this)" style="display: none;">✕ Remove</button>
                         <div class="form-group">
                             <label>Job Title *</label>
                             <input type="text" name="experience[0][title]" required>
@@ -146,7 +148,8 @@
             <section class="form-section">
                 <h2>Projects</h2>
                 <div id="projects-container">
-                    <div class="project-entry">
+                    <div class="project-entry" data-index="0">
+                        <button type="button" class="remove-btn" onclick="removeEntry(this)" style="display: none;">✕ Remove</button>
                         <div class="form-group">
                             <label>Project Name</label>
                             <input type="text" name="projects[0][name]">
@@ -172,7 +175,8 @@
             <section class="form-section">
                 <h2>Certifications</h2>
                 <div id="certifications-container">
-                    <div class="certification-entry">
+                    <div class="certification-entry" data-index="0">
+                        <button type="button" class="remove-btn" onclick="removeEntry(this)" style="display: none;">✕ Remove</button>
                         <div class="form-group">
                             <label>Certification Name</label>
                             <input type="text" name="certifications[0][name]">

@@ -137,7 +137,9 @@ function addEducation() {
     const container = document.getElementById('education-container');
     const entry = document.createElement('div');
     entry.className = 'education-entry';
+    entry.setAttribute('data-index', educationCount);
     entry.innerHTML = `
+        <button type="button" class="remove-btn" onclick="removeEntry(this)">✕ Remove</button>
         <div class="form-group">
             <label>Degree *</label>
             <input type="text" name="education[${educationCount}][degree]" required>
@@ -163,13 +165,16 @@ function addEducation() {
     `;
     container.appendChild(entry);
     educationCount++;
+    updateRemoveButtons();
 }
 
 function addExperience() {
     const container = document.getElementById('experience-container');
     const entry = document.createElement('div');
     entry.className = 'experience-entry';
+    entry.setAttribute('data-index', experienceCount);
     entry.innerHTML = `
+        <button type="button" class="remove-btn" onclick="removeEntry(this)">✕ Remove</button>
         <div class="form-group">
             <label>Job Title *</label>
             <input type="text" name="experience[${experienceCount}][title]" required>
@@ -195,13 +200,16 @@ function addExperience() {
     `;
     container.appendChild(entry);
     experienceCount++;
+    updateRemoveButtons();
 }
 
 function addProject() {
     const container = document.getElementById('projects-container');
     const entry = document.createElement('div');
     entry.className = 'project-entry';
+    entry.setAttribute('data-index', projectCount);
     entry.innerHTML = `
+        <button type="button" class="remove-btn" onclick="removeEntry(this)">✕ Remove</button>
         <div class="form-group">
             <label>Project Name</label>
             <input type="text" name="projects[${projectCount}][name]">
@@ -221,13 +229,16 @@ function addProject() {
     `;
     container.appendChild(entry);
     projectCount++;
+    updateRemoveButtons();
 }
 
 function addCertification() {
     const container = document.getElementById('certifications-container');
     const entry = document.createElement('div');
     entry.className = 'certification-entry';
+    entry.setAttribute('data-index', certificationCount);
     entry.innerHTML = `
+        <button type="button" class="remove-btn" onclick="removeEntry(this)">✕ Remove</button>
         <div class="form-group">
             <label>Certification Name</label>
             <input type="text" name="certifications[${certificationCount}][name]">
@@ -243,4 +254,29 @@ function addCertification() {
     `;
     container.appendChild(entry);
     certificationCount++;
+    updateRemoveButtons();
+}
+
+// Function to remove an entry
+function removeEntry(button) {
+    const entry = button.parentElement;
+    const container = entry.parentElement;
+    entry.remove();
+    updateRemoveButtons();
+}
+
+// Function to show/hide remove buttons (only show if more than 1 entry)
+function updateRemoveButtons() {
+    const containers = ['education-container', 'experience-container', 'projects-container', 'certifications-container'];
+    
+    containers.forEach(containerId => {
+        const container = document.getElementById(containerId);
+        const entries = container.children;
+        const removeButtons = container.querySelectorAll('.remove-btn');
+        
+        // Show remove buttons only if there's more than 1 entry
+        removeButtons.forEach(btn => {
+            btn.style.display = entries.length > 1 ? 'block' : 'none';
+        });
+    });
 }
