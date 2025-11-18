@@ -1,0 +1,18 @@
+# Ignore node_modules
+node_modules/
+
+# Ignore config file with sensitive credentials
+config.json
+
+# Ignore logs
+*.log
+
+# Ignore OS files
+.DS_Store
+Thumbs.db
+
+# Ignore IDE files
+.vscode/
+.idea/
+*.swp
+*.swo

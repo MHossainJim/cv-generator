@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Generator - Login</title>
+    <link rel="stylesheet" href="/public/css/style.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-card">
+            <h1>Portfolio Generator</h1>
+            <p class="subtitle">Create your professional CV in minutes</p>
+            <button id="google-login-btn" class="google-btn">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17.64 9.20454C17.64 8.56636 17.5827 7.95272 17.4764 7.36363H9V10.845H13.8436C13.635 11.97 13.0009 12.9231 12.0477 13.5613V15.8195H14.9564C16.6582 14.2527 17.64 11.9454 17.64 9.20454Z" fill="#4285F4"/>
+                    <path d="M9 18C11.43 18 13.4673 17.1941 14.9564 15.8195L12.0477 13.5613C11.2418 14.1013 10.2109 14.4204 9 14.4204C6.65591 14.4204 4.67182 12.8372 3.96409 10.71H0.957275V13.0418C2.43818 15.9831 5.48182 18 9 18Z" fill="#34A853"/>
+                    <path d="M3.96409 10.71C3.78409 10.17 3.68182 9.59318 3.68182 9C3.68182 8.40682 3.78409 7.83 3.96409 7.29V4.95818H0.957275C0.347727 6.17318 0 7.54772 0 9C0 10.4523 0.347727 11.8268 0.957275 13.0418L3.96409 10.71Z" fill="#FBBC05"/>
+                    <path d="M9 3.57954C10.3214 3.57954 11.5077 4.03363 12.4405 4.92545L15.0218 2.34409C13.4632 0.891818 11.4259 0 9 0C5.48182 0 2.43818 2.01681 0.957275 4.95818L3.96409 7.29C4.67182 5.16272 6.65591 3.57954 9 3.57954Z" fill="#EA4335"/>
+                </svg>
+                Sign in with Google
+            </button>
+            <div id="error-message" class="error-message" style="display: none;"></div>
+        </div>
+    </div>
+
+    <script src="/public/js/login.js"></script>
+</body>
+</html>
+    }
+
+    h2 {
+      margin-bottom: 12px;
+      font-weight: 600;
+      color: #1c1581;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 6px;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #ddd;
+      margin: 12px 0 20px;
+    }
+
+    .personal-info {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .description {
+      flex: 3;
+      font-size: 1em;
+      line-height: 1.4;
+    }
+
+    .picture img {
+      width: 140px;
+      height: 140px;
+      border-radius: 8px;
+      object-fit: cover;
+      border: 1px solid #ccc;
+    }
+
+    .skills-container {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .soft-skills, .tech-skills {
+      flex: 1 1 45%;
+    }
+
+    ul {
+      padding-left: 18px;
+      margin-top: 8px;
+    }
+
+    ul li {
+      margin-bottom: 6px;
+      font-size: 0.95em;
+    }
+
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px 12px;
+      text-align: left;
+      font-size: 0.95em;
+    }
+
+    th {
+      background-color: #f0f0f0;
+      font-weight: 600;
+      color: black;
+    }
+
+    .buttons {
+      margin-top: 15px;
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 8px 16px;
+      margin-right: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background-color 0.2s ease;
+      font-size: 1em;
+    }
+
+    button:hover {
+      background-color: #07488d;
+    }
+
+    button.skip {
+      background-color: #6c757d;
+    }
+
+    button.skip:hover {
+      background-color: #565e64;
+    }
+
+    .generate-btn {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .generate-btn button {
+      padding: 12px 30px;
+      font-size: 1.1em;
+      border-radius: 6px;
+      box-shadow: none;
+    }
+
+    @media (max-width: 600px) {
+      .personal-info {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .skills-container {
+        flex-direction: column;
+      }
+
+      .soft-skills, .tech-skills {
+        flex: unset;
+        margin-bottom: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <section id="personal-info-section">
+    <h2>Personal Information</h2>
+    <hr>
+    <div class="personal-info">
+      <div class="description">
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sapiente, fugiat repellendus. Dolor, assumenda? Et porro est nisi aperiam modi ratione delectus deleniti reprehenderit fuga corporis. Possimus recusandae ut expedita doloremque.</p>
+      </div>
+      <div class="picture">
+        <img src="profile_icon.jpg" alt="Person's Picture" />
+      </div>
+    </div>
+  </section>
+
+  <section id="personal-skills-section">
+    <h2>Personal Skills</h2>
+    <hr>
+    <div class="skills-container">
+      <div class="soft-skills">
+        <h3>Soft Skills</h3>
+        <ul>
+          <li>Communication</li>
+          <li>Teamwork</li>
+          <li>Problem Solving</li>
+        </ul>
+      </div>
+      <div class="tech-skills">
+        <h3>Tech Skills</h3>
+        <ul>
+          <li>HTML & CSS</li>
+          <li>JavaScript</li>
+          <li>Python</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="academic-background-section">
+    <h2>Academic Background</h2>
+    <hr>
+    <table>
+      <thead>
+        <tr>
+          <th>Exam</th>
+          <th>Institute</th>
+          <th>Year</th>
+          <th>CG</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Bachelor of Science</td>
+          <td>University of Example</td>
+          <td>2020</td>
+          <td>3.8</td>
+        </tr>
+        <tr>
+          <td>High School Diploma</td>
+          <td>Example High School</td>
+          <td>2016</td>
+          <td>3.6</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="buttons">
+      <button type="button">Add Information</button>
+      <button type="button" class="skip">Skip</button>
+    </div>
+  </section>
+
+  <section id="work-experience-section">
+    <h2>Work Experience</h2>
+    <hr>
+    <div class="work-data">
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis, eos tenetur, molestiae voluptatibus sapiente quo dignissimos illo voluptate dolorum commodi suscipit fugiat officia, reiciendis amet eaque aliquid inventore! Quasi, quisquam.</p>
+    </div>
+    <div class="buttons">
+      <button type="button">Add Information</button>
+      <button type="button" class="skip">Skip</button>
+    </div>
+  </section>
+
+  <section id="projects-publications-section">
+    <h2>Project and Publication</h2>
+    <hr>
+    <div class="projects-data">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, suscipit? Odit veritatis corrupti qui id amet minus iure et ullam fugiat optio nihil veniam, blanditiis ea in enim magnam repellat.</p>
+    </div>
+    <div class="buttons">
+      <button type="button">Add Information</button>
+      <button type="button" class="skip">Skip</button>
+    </div>
+  </section>
+
+  <div class="generate-btn">
+    <button type="button">Generate Portfolio</button>
+  </div>
+
+</body>
+</html>

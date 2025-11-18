@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Form</title>
+    <link rel="stylesheet" href="/public/css/style.css">
+</head>
+<body>
+    <div class="form-container">
+        <div class="form-header">
+            <h1>Create Your Portfolio</h1>
+            <div class="user-info">
+                <img id="user-avatar" src="" alt="User Avatar" class="avatar">
+                <span id="user-name"></span>
+            </div>
+        </div>
+
+        <form id="portfolio-form">
+            <!-- Personal Information -->
+            <section class="form-section">
+                <h2>Personal Information</h2>
+                <div class="form-group">
+                    <label for="fullName">Full Name *</label>
+                    <input type="text" id="fullName" name="fullName" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone">
+                </div>
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <input type="text" id="address" name="address">
+                </div>
+                <div class="form-group">
+                    <label for="linkedin">LinkedIn URL</label>
+                    <input type="url" id="linkedin" name="linkedin">
+                </div>
+                <div class="form-group">
+                    <label for="github">GitHub URL</label>
+                    <input type="url" id="github" name="github">
+                </div>
+                <div class="form-group">
+                    <label for="website">Personal Website</label>
+                    <input type="url" id="website" name="website">
+                </div>
+            </section>
+
+            <!-- Professional Summary -->
+            <section class="form-section">
+                <h2>Professional Summary</h2>
+                <div class="form-group">
+                    <label for="summary">Summary *</label>
+                    <textarea id="summary" name="summary" rows="5" required placeholder="Brief description of your professional background and goals"></textarea>
+                </div>
+            </section>
+
+            <!-- Education -->
+            <section class="form-section">
+                <h2>Education</h2>
+                <div id="education-container">
+                    <div class="education-entry">
+                        <div class="form-group">
+                            <label>Degree *</label>
+                            <input type="text" name="education[0][degree]" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Institution *</label>
+                            <input type="text" name="education[0][institution]" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Start Year</label>
+                                <input type="text" name="education[0][startYear]">
+                            </div>
+                            <div class="form-group">
+                                <label>End Year</label>
+                                <input type="text" name="education[0][endYear]">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea name="education[0][description]" rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="add-btn" onclick="addEducation()">+ Add Education</button>
+            </section>
+
+            <!-- Work Experience -->
+            <section class="form-section">
+                <h2>Work Experience</h2>
+                <div id="experience-container">
+                    <div class="experience-entry">
+                        <div class="form-group">
+                            <label>Job Title *</label>
+                            <input type="text" name="experience[0][title]" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Company *</label>
+                            <input type="text" name="experience[0][company]" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Start Date</label>
+                                <input type="text" name="experience[0][startDate]">
+                            </div>
+                            <div class="form-group">
+                                <label>End Date</label>
+                                <input type="text" name="experience[0][endDate]" placeholder="Present">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea name="experience[0][description]" rows="4" placeholder="Key responsibilities and achievements"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="add-btn" onclick="addExperience()">+ Add Experience</button>
+            </section>
+
+            <!-- Skills -->
+            <section class="form-section">
+                <h2>Skills</h2>
+                <div class="form-group">
+                    <label for="skills">Skills (comma separated) *</label>
+                    <textarea id="skills" name="skills" rows="3" required placeholder="JavaScript, Python, React, Node.js, etc."></textarea>
+                </div>
+            </section>
+
+            <!-- Projects -->
+            <section class="form-section">
+                <h2>Projects</h2>
+                <div id="projects-container">
+                    <div class="project-entry">
+                        <div class="form-group">
+                            <label>Project Name</label>
+                            <input type="text" name="projects[0][name]">
+                        </div>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea name="projects[0][description]" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Technologies Used</label>
+                            <input type="text" name="projects[0][technologies]" placeholder="React, Node.js, MongoDB">
+                        </div>
+                        <div class="form-group">
+                            <label>Project URL</label>
+                            <input type="url" name="projects[0][url]">
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="add-btn" onclick="addProject()">+ Add Project</button>
+            </section>
+
+            <!-- Certifications -->
+            <section class="form-section">
+                <h2>Certifications</h2>
+                <div id="certifications-container">
+                    <div class="certification-entry">
+                        <div class="form-group">
+                            <label>Certification Name</label>
+                            <input type="text" name="certifications[0][name]">
+                        </div>
+                        <div class="form-group">
+                            <label>Issuing Organization</label>
+                            <input type="text" name="certifications[0][issuer]">
+                        </div>
+                        <div class="form-group">
+                            <label>Year Obtained</label>
+                            <input type="text" name="certifications[0][year]">
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="add-btn" onclick="addCertification()">+ Add Certification</button>
+            </section>
+
+            <div class="form-actions">
+                <button type="submit" class="submit-btn">Generate Portfolio</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="/public/js/form.js"></script>
+</body>
+</html>
