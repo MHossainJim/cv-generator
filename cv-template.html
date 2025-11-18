@@ -8,9 +8,11 @@
     <script>
         // Inject environment variables from Vercel at runtime
         window.ENV_API_URL = '%%VITE_API_URL%%';
-        // Fallback for local development
+        // Fallback for local development or if env not set
         if (window.ENV_API_URL === '%%VITE_API_URL%%') {
-            window.ENV_API_URL = 'http://localhost:3000';
+            window.ENV_API_URL = window.location.hostname === 'localhost' 
+                ? 'http://localhost:3000' 
+                : 'https://cv-generator-t8cp.onrender.com';
         }
     </script>
 </head>

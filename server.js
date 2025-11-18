@@ -19,9 +19,17 @@ if (process.env.GOOGLE_CLIENT_ID) {
         frontendUrl: process.env.FRONTEND_URL || 'http://localhost:3000'
     };
 } else {
-    // Development environment
-    config = JSON.parse(fs.readFileSync('./config.json', 'utf8'));
-    config.frontendUrl = config.frontendUrl || 'http://localhost:3000';
+    // Development environment - only read config.json if it exists
+    try {
+        config = JSON.parse(fs.readFileSync('./config.json', 'utf8'));
+        config.frontendUrl = config.frontendUrl || 'http://localhost:3000';
+    } catch (error) {
+        console.error('ERROR: config.json not found and no environment variables set.');
+        console.error('Please either:');
+        console.error('1. Create config.json for local development, or');
+        console.error('2. Set environment variables: GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, FRONTEND_URL');
+        process.exit(1);
+    }
 }
 
 const client = new OAuth2Client(
